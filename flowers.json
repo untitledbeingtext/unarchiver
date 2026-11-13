@@ -1,0 +1,463 @@
+{
+  "palette": [
+    { "stem": "#9e9a51", "head": "#9dcbed" },
+    { "stem": "#4e4f27", "head": "#95aaad" },
+    { "stem": "#5b4722", "head": "#b1b4d5" },
+    { "stem": "#b0b735", "head": "#9dcbed" },
+    { "stem": "#556B2F", "head": "#E07A5F" },
+    { "stem": "#9babaa", "head": "#4f181d" },
+    { "stem": "#b0b735", "head": "#e49cff" },
+    { "stem": "#57552e", "head": "#e3a3a4" },
+    { "stem": "#b0b735", "head": "#f3c817" },
+    { "stem": "#6a332c", "head": "#f58021" },
+    { "stem": "#556B2F", "head": "#b0b735"}
+  ],
+  "flowers": [
+    {
+      "id": "daisy_ring",
+      "anchorCol": 4,
+      "pattern": [
+        "..FFFFF..",
+        ".FFFFFFF.",
+        ".FF...FF.",
+        ".FF...FF.",
+        ".FFFFFFF.",
+        "..FFFFF..",
+        "....S....",
+        "....S....",
+        "..S.S.S..",
+        ".SS.S.SS.",
+        "....S....",
+        "..S.S.S..",
+        ".SS.S.SS.",
+        "....S....",
+        "....S...."
+      ]
+    },
+    {
+      "id": "tulip_wide",
+      "anchorCol": 5,
+      "pattern": [
+        ".FF..F..FF.",
+        ".FFFFFFFFF.",
+        ".FFFFFFFFF.",
+        "..FFFFFFF..",
+        "...FFFFF...",
+        ".....S.....",
+        ".....S.....",
+        "SS...S...SS",
+        ".SS..S..SS.",
+        "..SS.S.SS..",
+        "...S.S.S...",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "four_petal_cross",
+      "anchorCol": 5,
+      "pattern": [
+        "....FFF....",
+        "...FFFFF...",
+        ".FFF...FFF.",
+        "FFFF...FFFF",
+        ".FFF...FFF.",
+        "...FFFFF...",
+        "....FFF....",
+        ".....S.....",
+        ".SS..S..SS.",
+        "..SS.S.SS..",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "lavender_spike",
+      "anchorCol": 5,
+      "pattern": [
+        ".....F.....",
+        "....FFF....",
+        ".....F.....",
+        "....FFF....",
+        "...FF.FF...",
+        "..FFFFFFF..",
+        "...FF.FF...",
+        ".....S.....",
+        ".SS..S..SS.",
+        "..SS.S.SS..",
+        "...SSSSS...",
+        "....SSS....",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "checker_bud",
+      "anchorCol": 4,
+      "pattern": [
+        "...FFF...",
+        "..FF.FF..",
+        ".FF.F.FF.",
+        "..FF.FF..",
+        "...FFF...",
+        "....S....",
+        "..S.S.S..",
+        "...SSS...",
+        "....S....",
+        ".SS.S.SS.",
+        "..S.S.S..",
+        "....S....",
+        "....S...."
+      ]
+    },
+    {
+      "id": "sunflower_burst",
+      "anchorCol": 4,
+      "pattern": [
+        "..FF.FF..",
+        ".FFFFFFF.",
+        "FF.FFF.FF",
+        ".FFFFFFF.",
+        "FF.FFF.FF",
+        ".FFFFFFF.",
+        "..FF.FF..",
+        "....S....",
+        "....S....",
+        ".SS.S.SS.",
+        "..SSSSS..",
+        "....S....",
+        "....S...."
+      ]
+    },
+    {
+      "id": "tulip_cup",
+      "anchorCol": 5,
+      "pattern": [
+        "....F.F....",
+        "..FFFFFFF..",
+        "..FFFFFFF..",
+        "..FFFFFFF..",
+        "...FFFFF...",
+        ".....S.....",
+        ".....S.....",
+        ".S...S...S.",
+        ".SS..S..SS.",
+        "..SS.S.SS..",
+        "...SSSSS...",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "diamond_bloom",
+      "anchorCol": 5,
+      "pattern": [
+        "....FFF....",
+        "...FFFFF...",
+        "..FFF.FFF..",
+        ".FF.....FF.",
+        "..FFF.FFF..",
+        "...FFFFF...",
+        "....FFF....",
+        ".....S.....",
+        "..S..S..S..",
+        ".SS..S..SS.",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "aster_star",
+      "anchorCol": 5,
+      "pattern": [
+        "...F.F.F...",
+        "..FFFFFFF..",
+        ".FFF...FFF.",
+        "FFFF...FFFF",
+        ".FFF...FFF.",
+        "..FFFFFFF..",
+        "...F.F.F...",
+        ".....S.....",
+        ".....S.....",
+        "...S.S.S...",
+        "..SS.S.SS..",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "bell_star_flower",
+      "anchorCol": 4,
+      "pattern": [
+        "...FFF...",
+        "...FFF...",
+        ".FFFFFFF.",
+        ".FFFFFFF.",
+        "..FFFFF..",
+        "...FFF...",
+        "....S....",
+        "....S....",
+        "..S.S.S..",
+        ".SS.S.SS.",
+        "....S....",
+        "....S...."
+      ]
+    },
+    {
+      "id": "tall_foxglove",
+      "anchorCol": 4,
+      "pattern": [
+        "....F....",
+        "...FFF...",
+        "....F....",
+        "...FFF...",
+        "...FFF...",
+        "..FFFFF..",
+        ".FF.F.FF.",
+        ".FF.S.FF.",
+        "....S....",
+        "..S.S.S..",
+        ".SS.S.SS.",
+        "....S....",
+        "....S...."
+      ]
+    },
+    {
+      "id": "lotus_cup",
+      "anchorCol": 4,
+      "pattern": [
+        "..FF.FF..",
+        ".FF.F.FF.",
+        ".FFFFFFF.",
+        ".FFFFFFF.",
+        "..FFFFF..",
+        "...FFF...",
+        "....S....",
+        "....S....",
+        "..S.S.S..",
+        ".SS.S.SS.",
+        "....S....",
+        "....S...."
+      ]
+    },
+    {
+      "id": "leafy_spike_original",
+      "name": "Cành lá chuẩn mẫu gốc",
+      "anchorCol": 6,
+      "pattern": [
+        "......F......",
+        ".....FFF.....",
+        "....F.F.F....",
+        ".....FFF.....",
+        "....F.F.F....",
+        ".....FFF.....",
+        "....F.F.F....",
+        ".....FFF.....",
+        "...F.F.F.F...",
+        "....F.F.F....",
+        "...F.F.F.F...",
+        "....F.F.F....",
+        "...F.F.F.F...",
+        ".S..F.F.F..S.",
+        ".S...S.S...S.",
+        ".SS..S.S..SS.",
+        "..SS.S.S.SS..",
+        "S..SSSSSSS..S",
+        "SS..SSSSS..SS",
+        ".SS..S.S..SS.",
+        "..SS.S.S.SS..",
+        "...SSSSSSS...",
+        "....SSSSS....",
+        "......S......",
+        "......S......"
+      ]
+    },
+    {
+      "id": "leaf_branch_single",
+      "anchorCol": 6,
+      "pattern": [
+        "......F......",
+        ".....FFF.....",
+        "....F.S.F....",
+        ".....FFF.....",
+        "......S......",
+        "......S......",
+        "......S......",
+        ".S...S.S...S.",
+        ".SS..SSS..SS.",
+        "..SS.SSS.SS..",
+        "...SSSSSSS...",
+        "....SSSSS....",
+        ".....SSS....."
+      ]
+    },
+    {
+      "id": "center_plant_variant_1",
+      "anchorCol": 5,
+      "pattern": [
+        ".....F.....",
+        "....FFF....",
+        "....FSF....",
+        "....FFF....",
+        ".....S.....",
+        ".....S.....",
+        "S....S....S",
+        ".SS..S..SS.",
+        "..SS.S.SS..",
+        "...SSSSS...",
+        "....SSS....",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "center_plant_variant_2",
+      "anchorCol": 5,
+      "pattern": [
+        "....FFF....",
+        "...FFFFF...",
+        "...F.S.F...",
+        "...FFFFF...",
+        "....FFF....",
+        ".....S.....",
+        "..S..S..S..",
+        ".SS..S..SS.",
+        "..SS.S.SS..",
+        "...SSSSS...",
+        "....SSS....",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "center_plant_variant_3",
+      "anchorCol": 5,
+      "pattern": [
+        ".....F.....",
+        "....FFF....",
+        "...FFFFF...",
+        "....FFF....",
+        ".....F.....",
+        ".....S.....",
+        "..S..S..S..",
+        ".SS..S..SS.",
+        "..SS.S.SS..",
+        "...SSSSS...",
+        "....SSS....",
+        ".....S.....",
+        ".....S....."
+      ]
+    },
+    {
+      "id": "daisy_cluster_1",
+      "anchorCol": 3,
+      "pattern": [
+        "..FFF..",
+        ".FFFFF.",
+        ".FFSFF.",
+        ".FFFFF.",
+        "..FFF..",
+        ".......",
+        "..S.S..",
+        ".SS.SS.",
+        "..S.S.."
+      ]
+    },
+    {
+      "id": "daisy_cluster_2",
+      "anchorCol": 3,
+      "pattern": [
+        "..FFF..",
+        ".FFFFF.",
+        ".FFSFF.",
+        ".FFFFF.",
+        "..FFF..",
+        "..S.S..",
+        ".SS.SS.",
+        "..S.S.."
+      ]
+    },
+    {
+      "id": "daisy_cluster_3",
+      "anchorCol": 3,
+      "pattern": [
+        "...F...",
+        "..FFF..",
+        ".FFSFF.",
+        "..FFF..",
+        "...F...",
+        "..S.S..",
+        ".SS.SS.",
+        "..S.S.."
+      ]
+    },
+    {
+      "id": "daisy_cluster_4",
+      "anchorCol": 3,
+      "pattern": [
+        "..FFF..",
+        ".FFFFF.",
+        "FF.S.FF",
+        ".FFFFF.",
+        "..FFF..",
+        "..S.S..",
+        ".SS.SS.",
+        "..S.S.."
+      ]
+    },
+    {
+      "id": "daisy_cluster_5",
+      "anchorCol": 3,
+      "pattern": [
+        "...F...",
+        "..FSF..",
+        ".FSFSF.",
+        "..FSF..",
+        "...F...",
+        "..S.S..",
+        ".SS.SS.",
+        "..S.S.."
+      ]
+    },
+    {
+      "id": "pixel_grass_small_1",
+      "anchorCol": 3,
+      "pattern": [
+        ".S.S.",
+        "SS.SS"
+      ]
+    },
+    {
+      "id": "pixel_grass_small_2",
+      "anchorCol": 3,
+      "pattern": [
+        "S...S",
+        "SS.SS"
+      ]
+    },
+    {
+      "id": "pixel_grass_tuft_1",
+      "anchorCol": 4,
+      "pattern": [
+        ".SS.SS.",
+        "SSSSSSS"
+      ]
+    },
+    {
+      "id": "pixel_grass_tuft_2",
+      "anchorCol": 4,
+      "pattern": [
+        "SS..SS",
+        ".SSSS."
+      ]
+    },
+    {
+      "id": "pixel_grass_low",
+      "anchorCol": 3,
+      "pattern": [
+        "S.S.S",
+        "SSSSS"
+      ]
+    }
+  ]
+}
