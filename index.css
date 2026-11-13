@@ -26,30 +26,25 @@ body {
   align-items: center;
 }.note {
   width: 330px;
-  height: 400px;
-  padding: 25px;
+  height: 345px;
+  padding: 15px;
   background-image: url(imgwebp/lime.webp);
   background-size: cover;
   position: relative;
   z-index: 1;
-
-  /* Cập nhật thành Flexbox để chia các phần tử con thành các dòng và căn giữa */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Căn giữa theo chiều dọc của tờ giấy */
   align-items: center;
-  /* Căn giữa theo chiều ngang */
   text-align: center;
-  /* Căn giữa chữ bên trong */
   box-sizing: border-box;
+  filter: drop-shadow(0 5px 2px rgba(0, 0, 0, .25));
 }
 
 .webtitle {
   font-family: 'Courier New', Courier, monospace;
   margin-bottom: 40px;
   color: #4e4035;
-  /* Tạo khoảng cách giữa tiêu đề và phần note vàng phía dưới */
 }
 
 .yellow_paper {
