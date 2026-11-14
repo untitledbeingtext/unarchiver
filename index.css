@@ -273,16 +273,16 @@ a {
   }
 
   .console-box {
-    right: 12px;
-    bottom: 12px;
+    bottom: 15px;
+    right: auto;
     width: 85%;
     font-size: 11.5px;
   }
 
   .console-app-btn {
-    bottom: 14px;
-    right: 14px;
-    width: 56px;
-    height: 56px;
+    bottom: 15px;
+    right: auto;
+    width: 35px;
+    height: 35px;
   }
 }
