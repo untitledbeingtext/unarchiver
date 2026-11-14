@@ -123,7 +123,8 @@ a {
 .console-box {
   position: fixed;
   bottom: 20px;
-  left: auto;
+  right: auto;
+  left:auto;
   width: 420px;
   background-image: url(imgwebp/neon.webp);
   background-size: contain;
@@ -132,7 +133,8 @@ a {
   z-index: 10;
   box-sizing: border-box;
   filter: drop-shadow(0 5px 2px rgba(0, 0, 0, 0.15));
-  transition: transform 0.35s ease, filter 0.35s ease;
+  transition: filter 0.35s ease;
+  touch-action: none;
 }
 
 .console-header {
@@ -146,21 +148,33 @@ a {
   border-bottom: 0.5px solid #4e4035;
   font-weight: bold;
   user-select: none;
-  cursor: pointer;
+  cursor: grab;
 }
 
-.console-toggle {
+.console-header:active {
+  cursor: grabbing;
+}
+
+.console-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.console-btn {
   background: transparent;
   border: 1px solid #4e4035;
   color: #4e4035;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1;
-  padding: 1px 6px;
+  padding: 2px 6px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.console-toggle:hover {
+.console-btn:hover {
   background-color: #4e4035;
   color: beige;
 }
@@ -188,20 +202,48 @@ a {
   display: none;
 }
 
-@keyframes consoleNoticeBounce {
-  0% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(0);
-  }
+.console-app-btn {
+  position: fixed;
+  bottom: 20px;
+  right: auto;
+  left:auto;
+  width: 35px;
+  height: 35px;
+  background-color: #4e4035;
+  border: none;
+  color: beige;
+  font-family: 'Courier New', Courier, monospace;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.15));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+/*
+.console-app-btn:hover {
+  transform: scale(1.06);
+  filter: drop-shadow(0 6px 3px rgba(0, 0, 0, 0.3));
+}*/
+
+.console-app-btn:active {
+  cursor: grabbing;
 }
 
-.console-box.minimized {
-  animation: consoleNoticeBounce 0.65s ease-out 0.6s 1;
+.console-app-btn .app-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.console-app-btn .app-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: -0.3px;
 }
 
 @media (max-width: 600px) {
@@ -231,10 +273,16 @@ a {
   }
 
   .console-box {
-    left: auto;
-    right: auto;
+    right: 12px;
     bottom: 12px;
-    width: 80%;
+    width: 85%;
     font-size: 11.5px;
+  }
+
+  .console-app-btn {
+    bottom: 14px;
+    right: 14px;
+    width: 56px;
+    height: 56px;
   }
 }

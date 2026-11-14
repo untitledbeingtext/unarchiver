@@ -37,10 +37,13 @@
       </div>
     </div>
 
-    <aside class="console-box minimized" id="guideConsole" aria-label="User Guide Console" style="font-size: 15px;">
+    <aside class="console-box" id="guideConsole" aria-label="User Guide Console" style="font-size: 15px;">
       <div class="console-header" style="padding-left: 20px; padding-right: 20px;">
         <span class="console-title">hello, notice me please :></span>
-        <button type="button" class="console-toggle" id="consoleToggleBtn" title="Open sesame!">+</button>
+        <div class="console-actions">
+          <button type="button" class="console-btn" id="consoleToggleBtn" title="Shrink">-</button>
+          <button type="button" class="console-btn" id="consoleCloseBtn" title="Close">×</button>
+        </div>
       </div>
       <div class="console-body" id="consoleBody" style="padding-left: 20px;">
         <p>Hovering around to feel the ground.</p>
@@ -48,6 +51,10 @@
         <p>Touch those lines to step into the archive.</p>
       </div>
     </aside>
+
+    <button type="button" class="console-app-btn" id="consoleAppBtn" title="Opening the instruction" style="display: none;">
+      <span class="app-icon">&gt;_</span>
+    </button>
   </section>
 
   <section class="about-me"></section>

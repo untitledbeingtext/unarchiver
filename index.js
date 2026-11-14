@@ -33,12 +33,151 @@
 
   const guideConsole = document.getElementById("guideConsole");
   const consoleToggleBtn = document.getElementById("consoleToggleBtn");
+  const consoleCloseBtn = document.getElementById("consoleCloseBtn");
+  const consoleAppBtn = document.getElementById("consoleAppBtn");
   const consoleHeader = guideConsole ? guideConsole.querySelector(".console-header") : null;
 
-  if (guideConsole && consoleToggleBtn && consoleHeader) {
-    consoleHeader.addEventListener("click", () => {
+  function makeDraggable(targetEl, handleEl, onDragEndCallback) {
+    let isDragging = false;
+    let hasMoved = false;
+    let startX = 0;
+    let startY = 0;
+    let initialLeft = 0;
+    let initialTop = 0;
+
+    function onStart(clientX, clientY) {
+      isDragging = true;
+      hasMoved = false;
+      const rect = targetEl.getBoundingClientRect();
+      initialLeft = rect.left;
+      initialTop = rect.top;
+      startX = clientX;
+      startY = clientY;
+
+      targetEl.style.left = `${initialLeft}px`;
+      targetEl.style.top = `${initialTop}px`;
+      targetEl.style.right = "auto";
+      targetEl.style.bottom = "auto";
+    }
+
+    function onMove(clientX, clientY) {
+      if (!isDragging) return;
+      const dx = clientX - startX;
+      const dy = clientY - startY;
+
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        hasMoved = true;
+      }
+
+      const maxLeft = window.innerWidth - targetEl.offsetWidth;
+      const maxTop = window.innerHeight - targetEl.offsetHeight;
+
+      const newLeft = Math.max(0, Math.min(initialLeft + dx, maxLeft));
+      const newTop = Math.max(0, Math.min(initialTop + dy, maxTop));
+
+      targetEl.style.left = `${newLeft}px`;
+      targetEl.style.top = `${newTop}px`;
+    }
+
+    function onEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+      if (onDragEndCallback) {
+        onDragEndCallback(hasMoved);
+      }
+    }
+
+    handleEl.addEventListener("mousedown", (e) => {
+      if (e.target.closest("button") && handleEl !== targetEl) return;
+      onStart(e.clientX, e.clientY);
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      onMove(e.clientX, e.clientY);
+    });
+
+    window.addEventListener("mouseup", onEnd);
+
+    handleEl.addEventListener("touchstart", (e) => {
+      if (e.target.closest("button") && handleEl !== targetEl) return;
+      if (e.touches.length > 0) {
+        onStart(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    window.addEventListener("touchmove", (e) => {
+      if (isDragging && e.touches.length > 0) {
+        onMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    window.addEventListener("touchend", onEnd);
+
+    return () => hasMoved;
+  }
+
+  if (guideConsole && consoleToggleBtn && consoleCloseBtn && consoleAppBtn && consoleHeader) {
+    let consoleWasDragged = false;
+    let appBtnWasDragged = false;
+
+    makeDraggable(guideConsole, consoleHeader, (moved) => {
+      consoleWasDragged = moved;
+    });
+
+    makeDraggable(consoleAppBtn, consoleAppBtn, (moved) => {
+      appBtnWasDragged = moved;
+    });
+
+    const toggleMinimize = () => {
       const isMinimized = guideConsole.classList.toggle("minimized");
-      consoleToggleBtn.textContent = isMinimized ? "+" : "_";
+      consoleToggleBtn.textContent = isMinimized ? "+" : "-";
+      consoleToggleBtn.title = isMinimized ? "Mở rộng" : "Thu lại";
+    };
+
+    consoleToggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMinimize();
+    });
+
+    consoleHeader.addEventListener("click", (e) => {
+      if (e.target.closest("button")) return;
+      if (consoleWasDragged) {
+        consoleWasDragged = false;
+        return;
+      }
+      toggleMinimize();
+    });
+
+    consoleCloseBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const rect = guideConsole.getBoundingClientRect();
+      guideConsole.style.display = "none";
+
+      consoleAppBtn.style.display = "flex";
+      const appLeft = Math.min(rect.left, window.innerWidth - consoleAppBtn.offsetWidth - 10);
+      const appTop = Math.min(rect.top, window.innerHeight - consoleAppBtn.offsetHeight - 10);
+      consoleAppBtn.style.left = `${Math.max(10, appLeft)}px`;
+      consoleAppBtn.style.top = `${Math.max(10, appTop)}px`;
+      consoleAppBtn.style.right = "auto";
+      consoleAppBtn.style.bottom = "auto";
+    });
+
+    consoleAppBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (appBtnWasDragged) {
+        appBtnWasDragged = false;
+        return;
+      }
+      const rect = consoleAppBtn.getBoundingClientRect();
+      consoleAppBtn.style.display = "none";
+      guideConsole.style.display = "block";
+
+      const maxLeft = window.innerWidth - guideConsole.offsetWidth - 10;
+      const maxTop = window.innerHeight - guideConsole.offsetHeight - 10;
+      guideConsole.style.left = `${Math.max(10, Math.min(rect.left, maxLeft))}px`;
+      guideConsole.style.top = `${Math.max(10, Math.min(rect.top, maxTop))}px`;
+      guideConsole.style.right = "auto";
+      guideConsole.style.bottom = "auto";
     });
   }
 
@@ -153,7 +292,12 @@
   function handlePlantFlower(clientX, clientY, targetEl) {
     if (!flowersList || flowersList.length === 0) return;
 
-    if (targetEl && (targetEl.closest(".console-box") || targetEl.closest(".note"))) {
+    if (
+      targetEl &&
+      (targetEl.closest(".console-box") ||
+        targetEl.closest(".console-app-btn") ||
+        targetEl.closest(".note"))
+    ) {
       return;
     }
 
