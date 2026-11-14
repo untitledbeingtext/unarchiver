@@ -31,6 +31,17 @@
   const flowersList = flowerLibrary.flowers;
   const paletteList = flowerLibrary.palette;
 
+  const guideConsole = document.getElementById("guideConsole");
+  const consoleToggleBtn = document.getElementById("consoleToggleBtn");
+  const consoleHeader = guideConsole ? guideConsole.querySelector(".console-header") : null;
+
+  if (guideConsole && consoleToggleBtn && consoleHeader) {
+    consoleHeader.addEventListener("click", () => {
+      const isMinimized = guideConsole.classList.toggle("minimized");
+      consoleToggleBtn.textContent = isMinimized ? "+" : "_";
+    });
+  }
+
   const canvas = document.createElement("canvas");
   canvas.style.position = "fixed";
   canvas.style.top = "0";
@@ -48,11 +59,10 @@
   let lastFlowerIndex = -1;
   let paletteIndex = 0;
 
-  const webTitleElement = document.querySelector(".webtitle");
   let webTitleBounds = null;
+  const noteEl = document.querySelector(".note");
 
   function updateNoteBounds() {
-    const noteEl = document.querySelector(".note");
     if (!noteEl) return;
     const rect = noteEl.getBoundingClientRect();
     webTitleBounds = {
@@ -61,6 +71,12 @@
       minRow: Math.floor((rect.top + window.scrollY) / GRID_SIZE) + 2,
       maxRow: Math.ceil((rect.bottom + window.scrollY) / GRID_SIZE) - 2
     };
+  }
+
+  
+  if (noteEl && "ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(() => updateNoteBounds());
+    resizeObserver.observe(noteEl);
   }
 
   function isCellInNoteZone(col, row) {
@@ -114,15 +130,19 @@
     handleInteraction(e.clientX, e.clientY);
   });
 
-  // iphone
   window.addEventListener("touchmove", (e) => {
     if (e.touches.length > 0) {
       handleInteraction(e.touches[0].clientX, e.touches[0].clientY);
     }
   }, { passive: true });
 
-  function handlePlantFlower(clientX, clientY) {
+  function handlePlantFlower(clientX, clientY, targetEl) {
     if (!flowersList || flowersList.length === 0) return;
+
+    
+    if (targetEl && (targetEl.closest(".console-box") || targetEl.closest(".note"))) {
+      return;
+    }
 
     const { col, row } = getGridCoords(clientX, clientY);
     if (isCellInNoteZone(col, row)) return;
@@ -154,13 +174,13 @@
 
   window.addEventListener("click", (e) => {
     if (Date.now() - lastTouchTime < 500) return;
-    handlePlantFlower(e.clientX, e.clientY);
+    handlePlantFlower(e.clientX, e.clientY, e.target);
   });
 
   window.addEventListener("touchstart", (e) => {
     lastTouchTime = Date.now();
     if (e.touches.length > 0) {
-      handlePlantFlower(e.touches[0].clientX, e.touches[0].clientY);
+      handlePlantFlower(e.touches[0].clientX, e.touches[0].clientY, e.target);
     }
   }, { passive: true });
 
