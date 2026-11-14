@@ -56,14 +56,16 @@
     if (!noteEl) return;
     const rect = noteEl.getBoundingClientRect();
     webTitleBounds = {
-      minCol: Math.floor((rect.left + window.scrollX) / GRID_SIZE)+2,
+      minCol: Math.floor((rect.left + window.scrollX) / GRID_SIZE) + 2,
       maxCol: Math.ceil((rect.right + window.scrollX) / GRID_SIZE) - 2,
-      minRow: Math.floor((rect.top + window.scrollY) / GRID_SIZE)+2,
+      minRow: Math.floor((rect.top + window.scrollY) / GRID_SIZE) + 2,
       maxRow: Math.ceil((rect.bottom + window.scrollY) / GRID_SIZE) - 2
     };
   }
 
   function isCellInNoteZone(col, row) {
+    if (window.innerWidth <= 600) return false;
+
     if (!webTitleBounds) return false;
     return (
       col >= webTitleBounds.minCol &&
@@ -148,11 +150,15 @@
     });
   }
 
+  let lastTouchTime = 0;
+
   window.addEventListener("click", (e) => {
+    if (Date.now() - lastTouchTime < 500) return;
     handlePlantFlower(e.clientX, e.clientY);
   });
 
   window.addEventListener("touchstart", (e) => {
+    lastTouchTime = Date.now();
     if (e.touches.length > 0) {
       handlePlantFlower(e.touches[0].clientX, e.touches[0].clientY);
     }

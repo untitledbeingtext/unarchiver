@@ -30,7 +30,7 @@ body {
 }
 
 .note {
-  color: #4e4035; 
+  color: #4e4035;
   width: 100%;
   max-width: 330px;
   min-height: 345px;
@@ -50,6 +50,7 @@ body {
   filter: drop-shadow(0 5px 2px rgba(0, 0, 0, .10));
   transition: all 0.5s ease-in-out;
 }
+
 .note:hover {
   filter:
     drop-shadow(0 7px 3px rgba(0, 0, 0, .35));
@@ -82,7 +83,7 @@ body {
 .connection1 {
   padding-left: 5%;
   width: 95%;
-  height: 40px;
+  height: 35px;
   display: flex;
   align-items: center;
   color: #4e4035;
@@ -95,4 +96,26 @@ body {
   background-image: url(imgwebp/neon.webp);
   background-size: cover;
   font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .note {
+    max-width: 264px;
+    min-height: 276px;
+    padding: 16px;
+    font-size: 12px;
+  }
+
+  .webtitle {
+    margin-bottom: 20px;
+  }
+
+  .yellow_paper {
+    font-size: 16px;
+    padding: 15px 0;
+  }
+
+  .connection1 {
+    height: 28px;
+  }
 }
