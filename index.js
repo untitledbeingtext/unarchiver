@@ -46,8 +46,6 @@
   canvas.style.position = "fixed";
   canvas.style.top = "0";
   canvas.style.left = "0";
-  canvas.style.width = "100vw";
-  canvas.style.height = "100vh";
   canvas.style.pointerEvents = "none";
   canvas.style.zIndex = "0";
   document.body.prepend(canvas);
@@ -73,7 +71,6 @@
     };
   }
 
-  
   if (noteEl && "ResizeObserver" in window) {
     const resizeObserver = new ResizeObserver(() => updateNoteBounds());
     resizeObserver.observe(noteEl);
@@ -91,12 +88,29 @@
     );
   }
 
+  function getViewportSize() {
+    const width = document.documentElement.clientWidth || window.innerWidth;
+    const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    return { width, height };
+  }
+
   function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const dpr = window.devicePixelRatio || 1;
+    const { width, height } = getViewportSize();
+
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     updateNoteBounds();
   }
+
   window.addEventListener("resize", resizeCanvas);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", resizeCanvas);
+  }
   resizeCanvas();
 
   function getGridCoords(clientX, clientY) {
@@ -139,7 +153,6 @@
   function handlePlantFlower(clientX, clientY, targetEl) {
     if (!flowersList || flowersList.length === 0) return;
 
-    
     if (targetEl && (targetEl.closest(".console-box") || targetEl.closest(".note"))) {
       return;
     }
@@ -185,10 +198,12 @@
   }, { passive: true });
 
   function render(now) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const { width: viewWidth, height: viewHeight } = getViewportSize();
 
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
+    ctx.clearRect(0, 0, viewWidth, viewHeight);
+
+    const scrollX = Math.round(window.scrollX);
+    const scrollY = Math.round(window.scrollY);
 
     for (const [key, cell] of hoverCells.entries()) {
       const screenX = cell.col * GRID_SIZE - scrollX;
@@ -196,9 +211,9 @@
 
       if (
         screenX + GRID_SIZE >= 0 &&
-        screenX <= canvas.width &&
+        screenX <= viewWidth &&
         screenY + GRID_SIZE >= 0 &&
-        screenY <= canvas.height
+        screenY <= viewHeight
       ) {
         ctx.save();
         ctx.globalAlpha = cell.alpha;
@@ -245,9 +260,9 @@
 
           if (
             screenX + GRID_SIZE < 0 ||
-            screenX > canvas.width ||
+            screenX > viewWidth ||
             screenY + GRID_SIZE < 0 ||
-            screenY > canvas.height
+            screenY > viewHeight
           ) {
             continue;
           }

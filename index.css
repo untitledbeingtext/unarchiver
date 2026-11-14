@@ -4,6 +4,7 @@ body {
     linear-gradient(to right, rgba(0, 153, 255, 0.2) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 153, 255, 0.2) 1px, transparent 1px);
   background-size: 10px 10px;
+  background-position: 0 0;
   background-color: rgb(255, 255, 242);
   margin: 0;
   overflow-x: hidden;
@@ -77,8 +78,8 @@ body {
   font-style: italic;
   line-height: 1.35;
   font-size: 15px;
-  
 }
+
 .yellow_paper {
   color: #4e4035;
   font-size: 18px;
@@ -95,9 +96,11 @@ body {
   border-top: 0.5px solid #4e4035;
   box-sizing: border-box;
 }
-a{
+
+a {
   height: 40px;
 }
+
 .connection1 {
   padding: 6px 10px;
   width: 100%;
@@ -185,6 +188,22 @@ a{
   display: none;
 }
 
+@keyframes consoleNoticeBounce {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+}
+
+.console-box.minimized {
+  animation: consoleNoticeBounce 0.65s ease-out 0.6s 1;
+}
+
 @media (max-width: 600px) {
   .note {
     max-width: 285px;
@@ -194,7 +213,7 @@ a{
 
   .webtitle {
     height: 108px;
-    padding-bottom: 12px;
+    padding-bottom: 12.5px;
   }
 
   .quote {
@@ -204,7 +223,6 @@ a{
   .yellow_paper {
     font-size: 15px;
     padding-top: 12px;
-    gap: 4px;
   }
 
   .connection1 {
