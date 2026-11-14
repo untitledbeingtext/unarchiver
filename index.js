@@ -48,24 +48,23 @@
   let lastFlowerIndex = -1;
   let paletteIndex = 0;
 
-  // Lấy riêng phần tử webtitle để làm vùng chặn
   const webTitleElement = document.querySelector(".webtitle");
   let webTitleBounds = null;
 
   function updateNoteBounds() {
-    if (!webTitleElement) return;
-    const rect = webTitleElement.getBoundingClientRect();
+    const noteEl = document.querySelector(".note");
+    if (!noteEl) return;
+    const rect = noteEl.getBoundingClientRect();
     webTitleBounds = {
-      minCol: Math.floor((rect.left + window.scrollX) / GRID_SIZE),
-      maxCol: Math.ceil((rect.right + window.scrollX) / GRID_SIZE) - 1,
-      minRow: Math.floor((rect.top + window.scrollY) / GRID_SIZE),
-      maxRow: Math.ceil((rect.bottom + window.scrollY) / GRID_SIZE) - 1
+      minCol: Math.floor((rect.left + window.scrollX) / GRID_SIZE)+2,
+      maxCol: Math.ceil((rect.right + window.scrollX) / GRID_SIZE) - 2,
+      minRow: Math.floor((rect.top + window.scrollY) / GRID_SIZE)+2,
+      maxRow: Math.ceil((rect.bottom + window.scrollY) / GRID_SIZE) - 2
     };
   }
 
   function isCellInNoteZone(col, row) {
     if (!webTitleBounds) return false;
-    // Chỉ chặn các ô nằm trong vùng của webtitle, cho phép yellow_paper hover/mọc hoa bình thường
     return (
       col >= webTitleBounds.minCol &&
       col <= webTitleBounds.maxCol &&
@@ -92,9 +91,8 @@
   }
 
   let lastHoverKey = "";
-  window.addEventListener("mousemove", (e) => {
-    const { col, row } = getGridCoords(e.clientX, e.clientY);
-
+  function handleInteraction(clientX, clientY) {
+    const { col, row } = getGridCoords(clientX, clientY);
     if (isCellInNoteZone(col, row)) return;
 
     const key = `${col},${row}`;
@@ -108,13 +106,23 @@
         color: isEven ? "#C7DC7C" : "#8B9E44"
       });
     }
+  }
+
+  window.addEventListener("mousemove", (e) => {
+    handleInteraction(e.clientX, e.clientY);
   });
 
-  window.addEventListener("click", (e) => {
+  // iphone
+  window.addEventListener("touchmove", (e) => {
+    if (e.touches.length > 0) {
+      handleInteraction(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
+  function handlePlantFlower(clientX, clientY) {
     if (!flowersList || flowersList.length === 0) return;
 
-    const { col, row } = getGridCoords(e.clientX, e.clientY);
-
+    const { col, row } = getGridCoords(clientX, clientY);
     if (isCellInNoteZone(col, row)) return;
 
     let nextIndex = Math.floor(Math.random() * flowersList.length);
@@ -138,9 +146,18 @@
       lastGrowTime: performance.now(),
       growSpeed: 50
     });
+  }
+
+  window.addEventListener("click", (e) => {
+    handlePlantFlower(e.clientX, e.clientY);
   });
 
-  // Render loops
+  window.addEventListener("touchstart", (e) => {
+    if (e.touches.length > 0) {
+      handlePlantFlower(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
   function render(now) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 

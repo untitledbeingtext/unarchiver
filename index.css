@@ -7,6 +7,7 @@ body {
   background-color: rgb(255, 255, 242);
   margin: 0;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 .homepage {
@@ -16,6 +17,8 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 #home {
@@ -25,12 +28,17 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .note {
-  width: 330px;
-  height: 345px;
-  padding: 15px;
+  color: #4e4035; 
+  width: 100%;
+  max-width: 330px;
+  min-height: 345px;
+  padding: 20px 20px;
+  font-size: 15px;
   background-image: url(imgwebp/lime.webp);
   background-size: cover;
+  background-position: center;
   position: relative;
   z-index: 1;
   display: flex;
@@ -39,12 +47,20 @@ body {
   align-items: center;
   text-align: center;
   box-sizing: border-box;
-  filter: drop-shadow(0 5px 2px rgba(0, 0, 0, .15));
+  filter: drop-shadow(0 5px 2px rgba(0, 0, 0, .10));
+  transition: all 0.5s ease-in-out;
+}
+.note:hover {
+  filter:
+    drop-shadow(0 7px 3px rgba(0, 0, 0, .35));
+  scale: 1.1;
+  box-shadow: 0 5 5px rgba(0, 0, 0, 0.5);
+  transform: scale(1.0025);
 }
 
 .webtitle {
   font-family: 'Courier New', Courier, monospace;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   color: #4e4035;
 }
 
@@ -58,17 +74,21 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 5px;
   align-items: left;
-  border-top: 1px solid #4e4035;
   text-align: left;
+  border-top: 0.5px solid #4e4035;
 }
+
 .connection1 {
+  padding-left: 5%;
+  width: 95%;
+  height: 40px;
+  display: flex;
+  align-items: center;
   color: #4e4035;
   text-decoration: none;
-  transition: all 0.5s ease-in-out;
-
 }
+
 .connection1:hover {
   cursor: pointer;
   transition: 0.5s;
