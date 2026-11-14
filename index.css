@@ -92,7 +92,7 @@ body {
   flex-direction: column;
   align-items: stretch;
   text-align: left;
-  border-top: 1px dashed #4e4035;
+  border-top: 1px #4e4035;
   box-sizing: border-box;
 }
 a{
