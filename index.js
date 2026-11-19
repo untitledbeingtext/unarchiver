@@ -467,13 +467,14 @@
       maxCol,
       minRow,
       maxRow,
+      offsetMinCol: minCol,
       offsetMaxCol: maxCol,
       offsetMinRow: minRow,
       offsetMaxRow: maxRow
     };
   }
 
-  // Kiểm tra đè lên cây cũ hoặc đè lên tờ note
+  // check if click on plant
   function checkFlowerOverlap(bounds) {
     for (const existing of plantedFlowers) {
       const ex = existing.bounds;
@@ -553,7 +554,7 @@
     const selectedFlower = flowersList[nextFlowerIndex];
     const bounds = getFlowerBounds(col, row, selectedFlower);
 
-    // Nếu đè lên cây cũ (hoặc đè vào tờ note) thì không cho trồng
+    // do not alow to plant over
     if (checkFlowerOverlap(bounds)) {
       return;
     }
@@ -624,7 +625,7 @@
       }
     }
 
-    // Vẽ các cây đã trồng
+    // render plants
     for (const flower of plantedFlowers) {
       const pattern = flower.pattern;
       const totalRows = pattern.length;
@@ -670,7 +671,7 @@
       }
     }
 
-    // Vẽ khung căn cây (offset 1 grid bên ngoài) khi rê chuột
+    // border
     if (
       hoverGridPos &&
       !isHoveringUI &&
@@ -695,7 +696,7 @@
         const minR = previewBounds.offsetMinRow;
         const maxR = previewBounds.offsetMaxRow;
 
-        // 4 góc bo chữ L ở viền offset 1 grid bên ngoài
+        // corner
         const cornerCoords = [
           { c: minC, r: minR }, { c: minC + 1, r: minR }, { c: minC, r: minR + 1 },
           { c: maxC, r: minR }, { c: maxC - 1, r: minR }, { c: maxC, r: minR + 1 },
@@ -717,7 +718,7 @@
           }
         }
 
-        // Điểm neo gốc cây tại vị trí con trỏ
+        // anchor point
         const anchorX = hoverGridPos.col * GRID_SIZE - scrollX;
         const anchorY = hoverGridPos.row * GRID_SIZE - scrollY;
         ctx.fillRect(anchorX + 1, anchorY + 1, GRID_SIZE - 1, GRID_SIZE - 1);
