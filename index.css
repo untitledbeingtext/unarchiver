@@ -47,6 +47,13 @@ body {
   box-sizing: border-box;
   filter: drop-shadow(0 5px 2px rgba(0, 0, 0, 0.15));
   transition: transform 0.35s ease, filter 0.35s ease;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.note:active {
+  cursor: grabbing;
 }
 
 .note:hover {
